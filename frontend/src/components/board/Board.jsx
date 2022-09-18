@@ -2,12 +2,16 @@ import React from "react";
 
 import "./style.css";
 class Board extends React.Component {
+  
+  timeout;
+
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
     this.drawOnCanvas();
+
   }
 
   drawOnCanvas() {
@@ -57,12 +61,18 @@ class Board extends React.Component {
       false
     );
 
+    var root = this;
     var onPaint = function () {
       ctx.beginPath();
       ctx.moveTo(last_mouse.x, last_mouse.y);
       ctx.lineTo(mouse.x, mouse.y);
       ctx.closePath();
       ctx.stroke();
+      
+      if(root.timeout != undefined) clearTimeout(root.timeout);
+      root.timeout = setTimeout(function(){
+        var base64ImageData = canvas.toDataUrl("image/png")
+      }, 1000)
     };
   }
 
