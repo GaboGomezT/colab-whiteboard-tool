@@ -1,6 +1,8 @@
 import React from "react";
 import Board from "../board/Board";
 
+import "./style.css";
+
 class Container extends React.Component
 {
     constructor(props){
@@ -14,7 +16,7 @@ class Container extends React.Component
                     <input type="color" />
                 </div>
 
-                <div className="board-containerjj">
+                <div className="board-container">
                     <Board></Board>
                 </div>
             </div>

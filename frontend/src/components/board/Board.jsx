@@ -1,5 +1,6 @@
 import React from "react";
 
+import "./style.css"
 class Board extends React.Component {
     constructor(props){
         super(props);
@@ -7,7 +8,7 @@ class Board extends React.Component {
 
     render() {
         return (
-            <h1>Hello</h1>
+            <canvas className="board" id="board"></canvas>
         )
     }
 }
