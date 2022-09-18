@@ -13,36 +13,39 @@ function App() {
   ];
 
   const x = [0.5, 1];
-const y = [1, 2];
-const z = [0, 0.5];
+  const y = [1, 2];
+  const z = [0, 0.5];
 
-const arrow = [
+  const arrow = [
     {
-        x: x,
-        y: y,
-        z: z,
-        mode: "lines",
-        type: "scatter3d",
-        hoverinfo: "none",
-        line: {
-            color: "blue",
-            width: 3
-        }
+      x: x,
+      y: y,
+      z: z,
+      mode: "lines",
+      type: "scatter3d",
+      hoverinfo: "none",
+      line: {
+        color: "blue",
+        width: 3,
+      },
     },
     {
-        type: "cone",
-        x: [x[1]],
-        y: [y[1]],
-        z: [z[1]],
-        u: [0.3*(x[1]-x[0])],
-        v: [0.3*(y[1]-y[0])],
-        w: [0.3*(z[1]-z[0])],
-        anchor: "tip", // make cone tip be at endpoint
-        hoverinfo: "none",
-        colorscale: [[0, "blue"], [1, "blue"]], // color all cones blue
-        showscale: false,
-    }
-];
+      type: "cone",
+      x: [x[1]],
+      y: [y[1]],
+      z: [z[1]],
+      u: [0.3 * (x[1] - x[0])],
+      v: [0.3 * (y[1] - y[0])],
+      w: [0.3 * (z[1] - z[0])],
+      anchor: "tip", // make cone tip be at endpoint
+      hoverinfo: "none",
+      colorscale: [
+        [0, "blue"],
+        [1, "blue"],
+      ], // color all cones blue
+      showscale: false,
+    },
+  ];
   return (
     <div className="App">
       <DrawingTool />
