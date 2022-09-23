@@ -1,6 +1,10 @@
 var app = require('express')();
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+var io = require('socket.io')(http, {
+    cors: {
+        origin: "*",
+    }
+});
 
 io.on('connection', (socket)=> {
       console.log('User Online');
@@ -11,7 +15,7 @@ io.on('connection', (socket)=> {
       })
 })
 
-var server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
+var server_port = process.env.YOUR_PORT || process.env.PORT || 5000;
 http.listen(server_port, () => {
     console.log("Started on : "+ server_port);
 })
