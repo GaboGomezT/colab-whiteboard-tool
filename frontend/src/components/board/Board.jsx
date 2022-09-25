@@ -2,21 +2,33 @@ import React from "react";
 import io from "socket.io-client";
 
 import "./style.css";
+
 class Board extends React.Component {
   timeout;
   socket = io.connect("http://localhost:5000");
+
+  ctx;
+  isDrawing = false;
 
   constructor(props) {
     super(props);
 
     this.socket.on("canvas-data", function (data) {
-      var image = new Image();
-      var canvas = document.querySelector("#board");
-      var ctx = canvas.getContext("2d");
-      image.onload = function () {
-        ctx.drawImage(image, 0, 0);
-      };
-      image.src = data;
+      var root = this; // the interval is used to solve the race condition when multiple users are drawing at the same time.
+      var interval = setInterval(function () {
+        if (root.isDrawing) return;
+        root.isDrawing = true;
+        clearInterval(interval);
+        var image = new Image();
+        var canvas = document.querySelector("#board");
+        var ctx = canvas.getContext("2d");
+        image.onload = function () {
+          ctx.drawImage(image, 0, 0);
+
+          root.isDrawing = false;
+        };
+        image.src = data;
+      }, 200);
     });
   }
 
@@ -24,9 +36,15 @@ class Board extends React.Component {
     this.drawOnCanvas();
   }
 
+  componentWillReceiveProps(newProps) {
+    this.ctx.strokeStyle = newProps.color;
+    this.ctx.lineWidth = newProps.size;
+  }
+
   drawOnCanvas() {
     var canvas = document.querySelector("#board");
-    var ctx = canvas.getContext("2d");
+    this.ctx = canvas.getContext("2d");
+    var ctx = this.ctx;
 
     var sketch = document.querySelector("#sketch");
     var sketch_style = getComputedStyle(sketch);
@@ -50,10 +68,10 @@ class Board extends React.Component {
     );
 
     /* Drawing on Paint App */
-    ctx.lineWidth = 5;
+    ctx.lineWidth = this.props.size;
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
-    ctx.strokeStyle = "blue";
+    ctx.strokeStyle = this.props.color;
 
     canvas.addEventListener(
       "mousedown",
