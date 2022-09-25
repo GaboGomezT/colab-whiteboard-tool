@@ -7,6 +7,18 @@
 
 .color-picker-container {
     text-align: center;
+    display: inline;
+    color: white;
+}
+
+.brushsize-container {
+    display: inline;
+    color: white;
+    margin-left: 12px;
+}
+
+.tools-section {
+    text-align: center;
 }
 
 .board-container {
