@@ -27,7 +27,7 @@ model Equipo {
   nombre      String
   creado      DateTime?        @default(now())
   integrantes Usuario_Equipo[]
-  Usuario     Usuario?         @relation(fields: [usuarioId], references: [id])
+  usuario     Usuario?         @relation(fields: [usuarioId], references: [id])
   usuarioId   Int?
   tableros    Tablero[]
 }
@@ -47,11 +47,11 @@ model Tablero {
   modificado DateTime? @default(now()) @updatedAt
   publico    Boolean?  @default(false)
   acceso     ACCESO?   @default(LECTURA)
-  Usuario    Usuario?  @relation(fields: [usuarioId], references: [id])
+  usuario    Usuario?  @relation(fields: [usuarioId], references: [id])
   usuarioId  Int?
-  Equipo     Equipo?   @relation(fields: [equipoId], references: [id])
+  equipo     Equipo?   @relation(fields: [equipoId], references: [id])
   equipoId   Int?
-  Permiso    Permiso[]
+  permisos   Permiso[]
 }
 
 model Permiso {
