@@ -6,27 +6,38 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model Usuario {
-  id            Int       @id @default(autoincrement())
-  correo        String    @unique
-  nombre        String
-  apellidos     String
-  clave_cifrada String
-  equipos       Equipo[]
-  tableros      Tablero[]
-  permisos      Permiso[]
+  id                 Int              @id @default(autoincrement())
+  correo             String           @unique
+  nombre             String
+  apellidos          String
+  clave_cifrada      String
+  equipos_integrante Usuario_Equipo[]
+  equipos            Equipo[]
+  tableros           Tablero[]
+  permisos           Permiso[]
 }
 
 model Equipo {
-  id          Int       @id @default(autoincrement())
+  id          Int              @id @default(autoincrement())
   nombre      String
-  creado      DateTime? @default(now())
-  integrantes Usuario[]
+  creado      DateTime?        @default(now())
+  integrantes Usuario_Equipo[]
+  Usuario     Usuario?         @relation(fields: [usuarioId], references: [id])
+  usuarioId   Int?
   tableros    Tablero[]
+}
+
+model Usuario_Equipo {
+  id        Int     @id @default(autoincrement())
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+  equipo    Equipo  @relation(fields: [equipoId], references: [id])
+  usuarioId Int
+  equipoId  Int
 }
 
 model Tablero {
