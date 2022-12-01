@@ -1,10 +1,10 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator erd {
-  provider = "prisma-erd-generator"
-  output = "../ERD.svg"
+  provider                  = "prisma-erd-generator"
+  output                    = "../ERD.svg"
   includeRelationFromFields = true
-  theme = "default"
+  theme                     = "default"
 }
 
 generator client {
@@ -31,10 +31,10 @@ model Usuario {
 model Equipo {
   id          Int              @id @default(autoincrement())
   nombre      String
-  creado      DateTime?        @default(now())
+  creado      DateTime         @default(now())
   integrantes Usuario_Equipo[]
-  propietario Usuario?         @relation(fields: [usuarioId], references: [id])
-  usuarioId   Int?
+  propietario Usuario          @relation(fields: [usuarioId], references: [id])
+  usuarioId   Int
   tableros    Tablero[]
 }
 
@@ -49,14 +49,14 @@ model Usuario_Equipo {
 model Tablero {
   id          Int       @id @default(autoincrement())
   nombre      String
-  creado      DateTime? @default(now())
-  modificado  DateTime? @default(now()) @updatedAt
-  publico     Boolean?  @default(false)
+  creado      DateTime  @default(now())
+  modificado  DateTime  @default(now()) @updatedAt
+  publico     Boolean   @default(false)
   acceso      ACCESO?   @default(LECTURA)
-  propietario Usuario?  @relation(fields: [usuarioId], references: [id])
-  usuarioId   Int?
-  equipo      Equipo?   @relation(fields: [equipoId], references: [id])
-  equipoId    Int?
+  propietario Usuario   @relation(fields: [usuarioId], references: [id])
+  usuarioId   Int
+  equipo      Equipo    @relation(fields: [equipoId], references: [id])
+  equipoId    Int
   permisos    Permiso[]
 }
 
