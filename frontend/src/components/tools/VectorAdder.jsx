@@ -7,9 +7,27 @@ class Form extends React.Component {
     const { onAdd, onChange, newValues } = this.props;
     return (
       <div>
-        <input type="number" id="x_2" onChange={onChange} placeholder="x_2" value={newValues.x_2}/>
-        <input type="number" id="y_2" onChange={onChange} placeholder="y_2" value={newValues.y_2}/>
-        <input type="number" id="z_2" onChange={onChange} placeholder="z_2" value={newValues.z_2}/>
+        <input
+          type="number"
+          id="x_2"
+          onChange={onChange}
+          placeholder="x_2"
+          value={newValues.x_2}
+        />
+        <input
+          type="number"
+          id="y_2"
+          onChange={onChange}
+          placeholder="y_2"
+          value={newValues.y_2}
+        />
+        <input
+          type="number"
+          id="z_2"
+          onChange={onChange}
+          placeholder="z_2"
+          value={newValues.z_2}
+        />
         <button onClick={onAdd}>Sumar</button>
       </div>
     );
