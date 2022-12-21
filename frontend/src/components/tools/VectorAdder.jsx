@@ -53,11 +53,17 @@ class VectorAdder extends React.Component {
     let arrows = this.state.arrows;
     const newdata = this.state.newvalues;
     var [x, y, z] = [[], [], []];
+    if(arrows.length >= 6) {
+        arrows.pop();
+        arrows.pop();
+    }
     if (!arrows.length) {
       // Revisamos si el arreglo está vacío, significa que estamos sumando nuestro primer vector
       x = [0, newdata.x_2];
       y = [0, newdata.y_2];
       z = [0, newdata.z_2];
+      arrows.push(generateLine(x, y, z));
+      arrows.push(generateCone(x, y, z));
     } else {
       var lastArray = arrows[arrows.length - 2];
       console.log(lastArray);
@@ -69,9 +75,15 @@ class VectorAdder extends React.Component {
       y = [y_1[1], y_1[1] + newdata.y_2];
       z = [z_1[1], z_1[1] + newdata.z_2];
       console.log(x, y, z);
-    }
-    arrows.push(generateLine(x, y, z));
-    arrows.push(generateCone(x, y, z));
+      arrows.push(generateLine(x, y, z));
+      arrows.push(generateCone(x, y, z));
+
+      var result_x = [0, x[1]];
+      var result_y = [0, y[1]];
+      var result_z = [0, z[1]];
+      arrows.push(generateLine(result_x, result_y, result_z));
+      arrows.push(generateCone(result_x, result_y, result_z));
+    } 
     this.setState({
       arrows: arrows,
       newvalues: {
