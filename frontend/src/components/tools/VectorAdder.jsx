@@ -53,9 +53,9 @@ class VectorAdder extends React.Component {
     let arrows = this.state.arrows;
     const newdata = this.state.newvalues;
     var [x, y, z] = [[], [], []];
-    if(arrows.length >= 6) {
-        arrows.pop();
-        arrows.pop();
+    if (arrows.length >= 6) {
+      arrows.pop();
+      arrows.pop();
     }
     if (!arrows.length) {
       // Revisamos si el arreglo está vacío, significa que estamos sumando nuestro primer vector
@@ -83,7 +83,7 @@ class VectorAdder extends React.Component {
       var result_z = [0, z[1]];
       arrows.push(generateLine(result_x, result_y, result_z));
       arrows.push(generateCone(result_x, result_y, result_z));
-    } 
+    }
     this.setState({
       arrows: arrows,
       newvalues: {
