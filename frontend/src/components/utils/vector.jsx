@@ -1,4 +1,4 @@
-export function generateCone(x, y, z) {
+export function generateCone(x, y, z, color="blue") {
   return {
     type: "cone",
     x: [x[1]],
@@ -10,14 +10,14 @@ export function generateCone(x, y, z) {
     anchor: "tip",
     hoverinfo: "none",
     colorscale: [
-      [0, "blue"],
-      [1, "blue"],
+      [0, color],
+      [1, color],
     ],
     showscale: false,
   };
 }
 
-export function generateLine(x, y, z) {
+export function generateLine(x, y, z, color="blue") {
   return {
     x: x,
     y: y,
@@ -26,7 +26,7 @@ export function generateLine(x, y, z) {
     type: "scatter3d",
     hoverinfo: "none",
     line: {
-      color: "blue",
+      color: color,
       width: 3,
     },
   };
