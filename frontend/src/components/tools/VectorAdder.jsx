@@ -52,9 +52,24 @@ class VectorAdder extends React.Component {
   handleAddVector(e) {
     let arrows = this.state.arrows;
     const newdata = this.state.newvalues;
-    const x = [0, newdata.x_2];
-    const y = [0, newdata.y_2];
-    const z = [0, newdata.z_2];
+    var [x, y, z] = [[], [], []];
+    if (!arrows.length) {
+      // Revisamos si el arreglo está vacío, significa que estamos sumando nuestro primer vector
+      x = [0, newdata.x_2];
+      y = [0, newdata.y_2];
+      z = [0, newdata.z_2];
+    } else {
+      var lastArray = arrows[arrows.length - 2];
+      console.log(lastArray);
+      var x_1 = lastArray.x;
+      var y_1 = lastArray.y;
+      var z_1 = lastArray.z;
+      console.log(x_1, y_1, z_1);
+      x = [x_1[1], x_1[1] + newdata.x_2];
+      y = [y_1[1], y_1[1] + newdata.y_2];
+      z = [z_1[1], z_1[1] + newdata.z_2];
+      console.log(x, y, z);
+    }
     arrows.push(generateLine(x, y, z));
     arrows.push(generateCone(x, y, z));
     this.setState({
