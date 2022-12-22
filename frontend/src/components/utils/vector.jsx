@@ -1,4 +1,4 @@
-export function generateCone(x, y, z, color="blue") {
+export function generateCone(x, y, z, color = "blue") {
   return {
     type: "cone",
     x: [x[1]],
@@ -17,7 +17,7 @@ export function generateCone(x, y, z, color="blue") {
   };
 }
 
-export function generateLine(x, y, z, color="blue") {
+export function generateLine(x, y, z, color = "blue") {
   return {
     x: x,
     y: y,
@@ -29,5 +29,25 @@ export function generateLine(x, y, z, color="blue") {
       color: color,
       width: 3,
     },
+  };
+}
+
+export function generateScatter(x, y, z) {
+  return {
+    x: x,
+    y: y,
+    z: z,
+    mode: "markers",
+    marker: {
+      color: "rgb(127, 127, 127)",
+      size: 12,
+      symbol: "circle",
+      line: {
+        color: "rgb(204, 204, 204)",
+        width: 1,
+      },
+      opacity: 0.8,
+    },
+    type: "scatter3d",
   };
 }
