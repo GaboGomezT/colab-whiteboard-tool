@@ -1,8 +1,14 @@
 import "./App.css";
-import Container from "./components/container/Container";
+import VectorAdder from "./components/tools/VectorAdder";
+import VectorialProduct from "./components/tools/VectorialProduct";
 
 function App() {
-  return <Container/>;
+  return (
+    <div>
+      <VectorAdder />
+      <VectorialProduct />
+    </div>
+  );
 }
 
 export default App;

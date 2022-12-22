@@ -108,7 +108,7 @@ class NormalPlane extends React.Component {
             newdata.u * (xi - newdata.x) +
             newdata.v * (yi - newdata.y) +
             newdata.w * (zi - newdata.z);
-          if (value == 0) {
+          if (value === 0) {
             a.push(xi);
             b.push(yi);
             c.push(zi);
