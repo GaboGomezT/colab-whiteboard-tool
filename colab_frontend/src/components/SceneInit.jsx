@@ -24,6 +24,8 @@ export default class SceneInit {
 
   initialize() {
     this.scene = new THREE.Scene();
+    // Set the background color
+    this.scene.background = new THREE.Color('White');
     this.camera = new THREE.PerspectiveCamera(
       this.fov,
       window.innerWidth / window.innerHeight,
