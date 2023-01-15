@@ -55,6 +55,8 @@ export default function CoordinateSystem() {
 
       // onLoad callback
       function (font) {
+        const cone_geometry = new THREE.ConeGeometry(0.1, 0.4, 32);
+
         // Add Label to Y axis
         var x_axis_label = new TextGeometry("X", {
           font: font,
@@ -71,6 +73,12 @@ export default function CoordinateSystem() {
         x_axis_label_mesh.position.set(10, -1, 0);
         environment.billboardText.push(x_axis_label_mesh);
         environment.scene.add(x_axis_label_mesh);
+
+        const x_material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const x_cone = new THREE.Mesh(cone_geometry, x_material);
+        x_cone.position.set(10, 0, 0);
+        x_cone.rotation.z = -Math.PI / 2;
+        environment.scene.add(x_cone);
 
         // Add Label to Y axis
         var y_axis_label = new TextGeometry("Y", {
@@ -89,6 +97,12 @@ export default function CoordinateSystem() {
         environment.billboardText.push(y_axis_label_mesh);
         environment.scene.add(y_axis_label_mesh);
 
+        const y_material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const y_cone = new THREE.Mesh(cone_geometry, y_material);
+        y_cone.position.set(0, 10, 0);
+        y_cone.rotation.y = Math.PI / 2;
+        environment.scene.add(y_cone);
+
         // Add Label to Z axis
         var z_axis_label = new TextGeometry("Z", {
           font: font,
@@ -103,9 +117,14 @@ export default function CoordinateSystem() {
           z_axis_label_material
         );
         z_axis_label_mesh.position.set(0, -1, 10);
-        // z_axis_label_mesh.rotation.y = Math.PI / 2;
         environment.billboardText.push(z_axis_label_mesh);
         environment.scene.add(z_axis_label_mesh);
+
+        const z_material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+        const z_cone = new THREE.Mesh(cone_geometry, z_material);
+        z_cone.position.set(0, 0, 10);
+        z_cone.rotation.x = Math.PI / 2;
+        environment.scene.add(z_cone);
 
         // Adding number labels
         for (var i = -10; i <= 10; i++) {
