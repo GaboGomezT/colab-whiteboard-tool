@@ -1,5 +1,5 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export default class SceneInit {
   constructor(canvasId) {
@@ -20,19 +20,23 @@ export default class SceneInit {
     // NOTE: Lighting is basically required.
     this.ambientLight = undefined;
     this.directionalLight = undefined;
+
+    this.billboardText = [];
   }
 
   initialize() {
     this.scene = new THREE.Scene();
     // Set the background color
-    this.scene.background = new THREE.Color('White');
+    this.scene.background = new THREE.Color("White");
     this.camera = new THREE.PerspectiveCamera(
       this.fov,
       window.innerWidth / window.innerHeight,
       1,
       1000
     );
-    this.camera.position.z = 48;
+    this.camera.position.x = 20;
+    this.camera.position.y = 5;
+    this.camera.position.z = 20;
 
     // NOTE: Specify a canvas which is already created in the HTML.
     const canvas = document.getElementById(this.canvasId);
@@ -48,7 +52,6 @@ export default class SceneInit {
     this.clock = new THREE.Clock();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-
     // ambient light which is for the whole scene
     this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     this.ambientLight.castShadow = true;
@@ -61,8 +64,7 @@ export default class SceneInit {
     this.scene.add(this.directionalLight);
 
     // if window resizes
-    window.addEventListener('resize', () => this.onWindowResize(), false);
-
+    window.addEventListener("resize", () => this.onWindowResize(), false);
   }
 
   animate() {
@@ -72,6 +74,10 @@ export default class SceneInit {
   }
 
   render() {
+    let camera = this.camera;
+    this.billboardText.forEach(function (text) {
+      text.lookAt(camera.position);
+    });
     this.renderer.render(this.scene, this.camera);
   }
 
